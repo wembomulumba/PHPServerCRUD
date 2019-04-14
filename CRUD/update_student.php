@@ -6,7 +6,8 @@
     File: update_student.php
 */
 
-
+ 
+// Access-Control Settings to allow clients to read/write from this server
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
