@@ -30,7 +30,7 @@ $postData = file_get_contents("php://input");
 $dataObject = json_decode($postData);
 
 $SID = mysql_real_escape_string($dataObject->SID);
-
+//server settings
 $servername = "localhost";
 $username = "Thomas";
 $password = "123456";
@@ -53,6 +53,7 @@ $result = mysql_query($sql) or die(mysql_error());
 $counter = 0;
 $grade_point = 0;
 
+// fetch all data
 while($row = mysql_fetch_array($result)){
 	if($row['grade'] == 'A'){
 	    $grade_point += 4;
