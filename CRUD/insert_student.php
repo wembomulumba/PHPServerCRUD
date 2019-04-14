@@ -2,11 +2,11 @@
 /*
     Author: Wembo Otepa Mulumba
     Last Working Date: April-14-2019
-    Description: This file delete student. 
-    File: delete_student.php
+    Description: This file insert new student.
+    File: insert_json.php
 */
 
-//http://stackoverflow.com/questions/18382740/cors-not-working-php
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     exit(0);
 }
+
 
 $postData = file_get_contents("php://input");
 $dataObject = json_decode($postData);
@@ -44,9 +45,15 @@ mysql_select_db($dbname, $conn);
 
 // Escape user inputs for security
 $SID = mysql_real_escape_string($dataObject->SID);
+$name = mysql_real_escape_string($dataObject->name);
+$IID = mysql_real_escape_string($dataObject->IID);
+$major = mysql_real_escape_string($dataObject->major);
+$degreeHeld = mysql_real_escape_string($dataObject->degreeHeld);
+$career = mysql_real_escape_string($dataObject->career);
 
-$sql = "DELETE from students
-        WHERE SID = $SID ";
+
+$sql = "INSERT INTO `students` (`SID`, `name`, `IID`, `major`, `degreeHeld`, `career`) VALUES
+        (" . $SID . ", '" .$name. "'," .$IID. ", '" .$major. "', '" . $degreeHeld . "', '" . $career. "')";
 
 mysql_query($sql);
 mysql_close($conn);

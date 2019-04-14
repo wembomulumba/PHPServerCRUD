@@ -1,0 +1,40 @@
+<?php
+/*
+  
+*/
+
+$postData = file_get_contents("php://input");
+$dataObject = json_decode($postData);
+
+$servername = "localhost";
+$username = "Thomas";
+$password = "123456";
+$dbname = "DB_II";
+
+// Create connection
+$conn = mysql_connect($servername, $username, $password);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysql_connect_error());
+}
+
+mysql_select_db($dbname, $conn);
+
+// Escape user inputs for security
+$SID = mysql_real_escape_string($dataObject->SID);
+
+
+
+$myfile = fopen("testfile.txt", "w") or die("Unable to open file!");
+
+$sql = "DELETE from students
+        WHERE SID = $SID ";
+
+
+fwrite($myfile, $sql);
+
+mysql_query($sql);
+
+fclose($myfile);
+mysql_close($conn);
+?>
