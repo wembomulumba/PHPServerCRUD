@@ -6,7 +6,7 @@
     File: insert_json.php
 */
 
-
+// Access-Control
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
@@ -30,9 +30,9 @@ $postData = file_get_contents("php://input");
 $dataObject = json_decode($postData);
 
 $servername = "localhost";
-$username = "Thomas";
-$password = "123456";
-$dbname = "DB_II";
+$username = "";
+$password = "";
+$dbname = "";
 
 // Create connection
 $conn = mysql_connect($servername, $username, $password);
@@ -51,10 +51,10 @@ $major = mysql_real_escape_string($dataObject->major);
 $degreeHeld = mysql_real_escape_string($dataObject->degreeHeld);
 $career = mysql_real_escape_string($dataObject->career);
 
-
+// sql statemnet to insert data
 $sql = "INSERT INTO `students` (`SID`, `name`, `IID`, `major`, `degreeHeld`, `career`) VALUES
         (" . $SID . ", '" .$name. "'," .$IID. ", '" .$major. "', '" . $degreeHeld . "', '" . $career. "')";
 
-mysql_query($sql);
-mysql_close($conn);
+mysql_query($sql); // execute the query
+mysql_close($conn); // close the connection
 ?>
