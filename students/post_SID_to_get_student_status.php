@@ -2,12 +2,14 @@
 /**************************************************
 
 Author: Wembo Otepa Mulumba
-Last Working Date: April-14-2019
+Last Working Date: May 08 -2019
 Description: PHP & MySQL backend to update and explain
              student passing status.
-File: post_SID_to_get_student_status
+
 
 **************************************************/
+
+// Security Settings
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
@@ -43,6 +45,7 @@ if (!$conn) {
     die("Connection failed: " . mysql_connect_error());
 }
 
+//execute the query
 mysql_select_db($dbname, $conn);
 
 /* Calculating graduate GPA  */
